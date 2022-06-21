@@ -1,8 +1,22 @@
+function getdeposit(){
+
+    const depositinput=document.getElementById('deposit-input')
+    const newdeposit=depositinput.value;
+    const depositadd = parseFloat(newdeposit);
+       // clere Diposit //
+   depositinput.value=''
+    return depositadd;
+
+}
+
+
+
 /// Handel deposit//
 document.getElementById('deposit-button').addEventListener('click', function(){
-   const depositinput=document.getElementById('deposit-input')
-   const newdeposit=depositinput.value;
-   const depositadd = parseFloat(newdeposit);
+//    const depositinput=document.getElementById('deposit-input')
+//    const newdeposit=depositinput.value;
+//    const depositadd = parseFloat(newdeposit);
+    const depositadd=getdeposit()
    const depositBlance=document.getElementById('deposit-total')
    const newdepositBlance= depositBlance.innerText;
    const totaldeposit= parseFloat(newdepositBlance);
@@ -16,8 +30,8 @@ document.getElementById('deposit-button').addEventListener('click', function(){
    const newblance = parseFloat(totalblance);
    const finalBlance = newblance +depositadd;
    blance.innerText=finalBlance;
-   // clere Diposit //
-   depositinput.value=''
+//    // clere Diposit //
+//    depositinput.value=''
 })
 
 /// Handel Withdrew//
