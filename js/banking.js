@@ -1,54 +1,55 @@
-function getdeposit(){
+// Input Function
+function inputadd(inputad){
+    const deposit=document.getElementById(inputad)
+const depositfield=deposit.value;
+const newdeposit=parseFloat(depositfield);
+// Clere Diposit Field//
+deposit.value="";
+return newdeposit;
+}
 
-    const depositinput=document.getElementById('deposit-input')
-    const newdeposit=depositinput.value;
-    const depositadd = parseFloat(newdeposit);
-       // clere Diposit //
-   depositinput.value=''
-    return depositadd;
+// Input Add Function//
+
+function blanceadd(idInput,newdeposit){
+    const depositText=document.getElementById(idInput)
+const depositadd= depositText.innerText;
+const totalDeposit=parseFloat(depositadd);
+depositText.innerText=newdeposit + totalDeposit;
+
+}
+function getcurrentBlance(){
+    const totalBlance=document.getElementById('balance-total')
+const blanceText=totalBlance.innerText;
+const totaladd= parseFloat(blanceText);
+return totaladd;
 
 }
 
+// Input Function Total//
+function totalBlance(newdeposit,isadd){
+const totalBlance=document.getElementById('balance-total')
+// const blanceText=totalBlance.innerText;
+// const totaladd= parseFloat(blanceText);
+const totaladd=getcurrentBlance();
+if(isadd == true){
+    totalBlance.innerText = newdeposit + totaladd;
+}
+else{
+    totalBlance.innerText = totaladd - newdeposit;
+}
 
-
-/// Handel deposit//
-document.getElementById('deposit-button').addEventListener('click', function(){
-//    const depositinput=document.getElementById('deposit-input')
-//    const newdeposit=depositinput.value;
-//    const depositadd = parseFloat(newdeposit);
-    const depositadd=getdeposit()
-   const depositBlance=document.getElementById('deposit-total')
-   const newdepositBlance= depositBlance.innerText;
-   const totaldeposit= parseFloat(newdepositBlance);
-   const totaldepositBlance=depositadd + totaldeposit;
-   depositBlance.innerText=totaldepositBlance;
-
-   // total Blance handel//
-
-   const blance=document.getElementById('balance-total');
-   const totalblance =blance.innerText;
-   const newblance = parseFloat(totalblance);
-   const finalBlance = newblance +depositadd;
-   blance.innerText=finalBlance;
-//    // clere Diposit //
-//    depositinput.value=''
+}
+document.getElementById('deposit-button').addEventListener('click',function(){
+const newdeposit=inputadd('deposit-input')
+blanceadd('deposit-total',newdeposit)
+totalBlance(newdeposit, true)
 })
 
-/// Handel Withdrew//
 document.getElementById('withdraw-button').addEventListener('click', function(){
-    const withdraw=document.getElementById('withdraw-input')
-    const newwithdraw=withdraw.value;
-    const withdrewadd= parseFloat(newwithdraw);
-    const witdrawbllance=document.getElementById('withdraw-total')
-    const withdrawtotal = witdrawbllance.innerText;
-    const newWithdrw=parseFloat(withdrawtotal);
-    const totalwithdrew=withdrewadd + newWithdrw;
-    witdrawbllance.innerText=totalwithdrew;
-    const blance=document.getElementById('balance-total');
-    const totalblance =blance.innerText;
-    const newblance = parseFloat(totalblance);
-    const finalBlance = newblance - totalwithdrew;
-    blance.innerText=finalBlance;
-    // clere withdrew//
-    withdraw.value=''
+   const newWithDrew= inputadd('withdraw-input')
+   const currentBlance = getcurrentBlance()
+    if(newWithDrew > 0 && newWithDrew < currentBlance){
+    blanceadd('withdraw-total',newWithDrew)
+    totalBlance(newWithDrew,false)
+    }
 })
